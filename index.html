@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SCP:SL Title Preview — Server List Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="./styles.css" rel="stylesheet" />
+  <link href="./logo.png" rel="icon" />
+</head>
+<body>
+  <header class="topbar">
+    <h1 id="title">SCP:SL Title Preview (Server List)</h1>
+
+    <!-- Custom language selector -->
+    <div class="lang-select" id="langSelect">
+      <button id="langBtn" class="lang-btn" aria-haspopup="listbox" aria-expanded="false">
+        <span id="langFlag" class="flag"></span>
+        <span id="langText">English</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+        </svg>
+      </button>
+      <ul id="langMenu" class="lang-menu" role="listbox" tabindex="-1" aria-label="Language">
+        <li class="lang-option" role="option" data-lang="en" aria-selected="true"><span class="flag"></span> English</li>
+        <li class="lang-option" role="option" data-lang="es" aria-selected="false"><span class="flag"></span> Spanish</li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <label id="lblInput" class="field-label">Unity RichText</label>
+      <textarea id="input" spellcheck="false"
+        placeholder="<size=80><b><color=#54B478>[ARG]</color>  《 New Era 》  [¡VOLVIMOS!]</color></b></size>\n<size=45><b>[ Round Time: {round_duration_minutes}:{round_duration_seconds} | NTF: {alive_team,1} | Chaos: {alive_team,2} | Class D: {alive_team,4} | Scientists: {alive_team,3} | SCPs: {alive_team,0} ]</b></size>"></textarea>
+
+      <div class="vars">
+        <label id="lblMinutes">round_duration_minutes
+          <input type="number" id="var_minutes" value="06" min="0" />
+        </label>
+        <label id="lblSeconds">round_duration_seconds
+          <input type="number" id="var_seconds" value="59" min="0" max="59" />
+        </label>
+        <label id="lblTeam0">alive_team,0 (SCPs)
+          <input type="number" id="team_0" value="1"  min="0" />
+        </label>
+        <label id="lblTeam1">alive_team,1 (NTF)
+          <input type="number" id="team_1" value="0"  min="0" />
+        </label>
+        <label id="lblTeam2">alive_team,2 (Chaos)
+          <input type="number" id="team_2" value="0"  min="0" />
+        </label>
+        <label id="lblTeam3">alive_team,3 (Scientists)
+          <input type="number" id="team_3" value="0"  min="0" />
+        </label>
+        <label id="lblTeam4">alive_team,4 (Class D)
+          <input type="number" id="team_4" value="0"  min="0" />
+        </label>
+      </div>
+    </section>
+
+    <section class="preview-card">
+      <div class="preview-head">
+        <span id="previewTitle">Preview</span>
+        <span class="hint" id="hint">Render matches the in-game server list column.</span>
+      </div>
+
+      <div class="serverlist-frame">
+        <div id="previewWrap" class="preview-wrap">
+          <div id="preview" class="preview"></div>
+        </div>
+      </div>
+
+      <small id="note" class="footnote">
+        Fixed profile: per-line autoscale (left-aligned), exact spaces preserved, TMP-like sizes and weight.
+      </small>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

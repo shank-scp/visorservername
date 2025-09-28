@@ -1,0 +1,141 @@
+:root{
+  --bg:#0a0b0d;
+  --bg2:#0f1116;
+  --ink:#e6ecf3;
+  --muted:#9aa3af;
+  --border:#1f2430;
+  --elev: rgba(0,0,0,.35);
+}
+
+/* Reset */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:
+    radial-gradient(1000px 400px at 75% -10%, #1a1f27 0%, var(--bg) 60%),
+    linear-gradient(180deg, #0a0b0d, #0c0d11 60%, #0a0b0d);
+  color:var(--ink);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Topbar */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 18px;
+  background:linear-gradient(180deg, rgba(10,12,16,.85), rgba(10,12,16,.6));
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid #141822;
+}
+.topbar h1{margin:0; font-size:18px; letter-spacing:.2px; color:#dfe6ee; font-weight:600}
+
+/* Custom language selector */
+.lang-select{ position:relative; z-index:1000; }
+.lang-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,.06);
+  border:1px solid #2b3140; color:var(--ink);
+  padding:6px 10px; border-radius:10px; cursor:pointer;
+  box-shadow: 0 4px 18px var(--elev), inset 0 0 0 1px rgba(255,255,255,.04);
+  transition: border-color .2s ease, background .2s ease, transform .08s ease;
+}
+.lang-btn:hover{border-color:#3b4356; background:rgba(255,255,255,.09)}
+.lang-btn:active{transform:scale(.98)}
+.flag{font-size:18px; line-height:1}
+.lang-btn svg{opacity:.8}
+
+/* Dropdown menu */
+.lang-menu{
+  position:absolute; right:0; top:110%;
+  min-width:180px; background:#0f1218; border:1px solid #262b36;
+  border-radius:12px; padding:6px; margin:0; list-style:none;
+  box-shadow: 0 16px 44px rgba(0,0,0,.45);
+  display:none;
+}
+.lang-menu.open{ display:block; }
+.lang-option{
+  display:flex; align-items:center; gap:8px;
+  padding:10px 12px; border-radius:9px; cursor:pointer; color:#dde3ec;
+}
+.lang-option[aria-selected="true"]{
+  background:#161b25; font-weight:600;
+}
+.lang-option:hover{ background:#161b25; }
+
+/* Layout */
+.wrap{max-width:1100px; margin:0 auto; padding:18px; display:grid; gap:16px}
+
+.panel, .preview-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.05));
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+  box-shadow: 0 12px 38px var(--elev);
+}
+
+/* Inputs */
+.field-label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+textarea#input{
+  width:100%; height:170px; resize:vertical;
+  background:var(--bg2); color:#eaf1f9;
+  border:1px solid #232838; border-radius:12px;
+  padding:12px 14px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size:13px; line-height:1.45;
+  outline:none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+}
+.vars{
+  display:grid; grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:12px; margin-top:12px;
+}
+.vars label{display:grid; gap:6px; font-size:12px; color:var(--muted)}
+.vars input{
+  padding:9px 10px; border-radius:10px; border:1px solid #2a3040;
+  background:var(--bg2); color:#eaf1f9; outline:none;
+}
+
+/* Preview */
+.preview-card{display:grid; gap:10px}
+.preview-head{display:flex; align-items:center; justify-content:space-between}
+#previewTitle{font-weight:600; letter-spacing:.2px}
+.hint{color:var(--muted); font-size:12px}
+
+.serverlist-frame{
+  background:#101214;
+  border:1px solid #1f2430;
+  border-radius:14px;
+  padding:8px 10px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+}
+.preview-wrap{
+  width:612px;           /* ancho de la columna del título en la lista */
+  overflow:hidden;
+  padding-right:2px;     /* evita corte por redondeo al escalar */
+}
+.preview{
+  line-height:1.10;
+  letter-spacing:-0.65px;
+  font-weight:600;
+  transform-origin:left top;
+}
+
+/* Cada renglón preserva espacios y se escala individualmente */
+.line{
+  display:block;
+  white-space:pre;       /* NO colapsa espacios */
+  transform-origin:left top;
+  text-align:left;
+  margin:0;
+}
+
+/* Negrita estilo TMP */
+.preview b{font-weight:800}
+
+.footnote{color:var(--muted); font-size:12px}
+
+/* Responsive */
+@media (max-width: 720px){
+  .preview-wrap{ width:100%; }
+}
