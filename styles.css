@@ -7,7 +7,6 @@
   --elev: rgba(0,0,0,.35);
 }
 
-/* Reset */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -19,7 +18,6 @@ body{
   font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-/* Topbar */
 .topbar{
   position:sticky; top:0; z-index:50;
   display:flex; align-items:center; justify-content:space-between;
@@ -30,7 +28,6 @@ body{
 }
 .topbar h1{margin:0; font-size:18px; letter-spacing:.2px; color:#dfe6ee; font-weight:600}
 
-/* Custom language selector */
 .lang-select{ position:relative; z-index:1000; }
 .lang-btn{
   display:inline-flex; align-items:center; gap:8px;
@@ -45,7 +42,6 @@ body{
 .flag{font-size:18px; line-height:1}
 .lang-btn svg{opacity:.8}
 
-/* Dropdown menu */
 .lang-menu{
   position:absolute; right:0; top:110%;
   min-width:180px; background:#0f1218; border:1px solid #262b36;
@@ -63,7 +59,6 @@ body{
 }
 .lang-option:hover{ background:#161b25; }
 
-/* Layout */
 .wrap{max-width:1100px; margin:0 auto; padding:18px; display:grid; gap:16px}
 
 .panel, .preview-card{
@@ -74,7 +69,6 @@ body{
   box-shadow: 0 12px 38px var(--elev);
 }
 
-/* Inputs */
 .field-label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
 textarea#input{
   width:100%; height:170px; resize:vertical;
@@ -96,7 +90,6 @@ textarea#input{
   background:var(--bg2); color:#eaf1f9; outline:none;
 }
 
-/* Preview */
 .preview-card{display:grid; gap:10px}
 .preview-head{display:flex; align-items:center; justify-content:space-between}
 #previewTitle{font-weight:600; letter-spacing:.2px}
@@ -110,9 +103,9 @@ textarea#input{
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
 }
 .preview-wrap{
-  width:612px;           /* ancho de la columna del título en la lista */
+  width:612px;       
   overflow:hidden;
-  padding-right:2px;     /* evita corte por redondeo al escalar */
+  padding-right:2px;     
 }
 .preview{
   line-height:1.10;
@@ -121,21 +114,19 @@ textarea#input{
   transform-origin:left top;
 }
 
-/* Cada renglón preserva espacios y se escala individualmente */
 .line{
   display:block;
-  white-space:pre;       /* NO colapsa espacios */
+  white-space:pre;   
   transform-origin:left top;
   text-align:left;
   margin:0;
 }
 
-/* Negrita estilo TMP */
 .preview b{font-weight:800}
 
 .footnote{color:var(--muted); font-size:12px}
 
-/* Responsive */
 @media (max-width: 720px){
   .preview-wrap{ width:100%; }
 }
+
