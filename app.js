@@ -1,6 +1,5 @@
 const $ = q => document.querySelector(q);
 
-/* Elements */
 const input = $("#input");
 const preview = $("#preview");
 const previewWrap = $("#previewWrap");
@@ -15,7 +14,6 @@ const varMinutes = $("#var_minutes");
 const varSeconds = $("#var_seconds");
 const teamInputs = [$("#team_0"), $("#team_1"), $("#team_2"), $("#team_3"), $("#team_4")];
 
-/* i18n texts */
 const texts = {
   en: {
     title: "SCP:SL Title Preview (Server List)",
@@ -57,7 +55,6 @@ const texts = {
 
 let lang = localStorage.getItem("lang") || "en";
 
-/* Apply language to UI */
 function applyLang(){
   const t = texts[lang];
   document.documentElement.setAttribute("lang", lang);
@@ -78,14 +75,12 @@ function applyLang(){
   langText.textContent = t.name;
   input.setAttribute("placeholder", t.placeholder);
 
-  // marcar opción activa en el menú
   [...langMenu.querySelectorAll(".lang-option")].forEach(li=>{
     const selected = li.getAttribute("data-lang") === lang;
     li.setAttribute("aria-selected", selected ? "true" : "false");
   });
 }
 
-/* Menu open/close (robusto) */
 function openMenu(){
   langMenu.classList.add("open");
   langBtn.setAttribute("aria-expanded", "true");
@@ -122,7 +117,6 @@ langMenu.addEventListener("keydown", (e)=>{
   }
 });
 
-/* Select language */
 [...langMenu.querySelectorAll(".lang-option")].forEach(li=>{
   li.setAttribute("tabindex","0");
   li.addEventListener("click", ()=>{
@@ -137,18 +131,15 @@ langMenu.addEventListener("keydown", (e)=>{
   });
 });
 
-/* TMP-like mapping (fixed profile) */
-const SIZE_FACTOR = 0.265;  // Unity <size=N> → px ≈ N * factor
+const SIZE_FACTOR = 0.265;
 const SIZE_MIN_PX = 11;
-const SIZE_MAX_PX = 21;     // cap main line
+const SIZE_MAX_PX = 21;
 
-/* Re-render on input */
 [input, varMinutes, varSeconds, ...teamInputs].forEach(el => el.addEventListener("input", render));
 
 function render(){
   let raw = input.value ?? "";
 
-  // Replace placeholders
   const mins = pad2(clampInt(+varMinutes.value, 0, 999));
   const secs = pad2(clampInt(+varSeconds.value, 0, 59));
   const teams = teamInputs.map(i => clampInt(+i.value, 0, 999));
@@ -158,10 +149,8 @@ function render(){
     .replaceAll("{round_duration_seconds}", secs)
     .replace(/\{alive_team\s*,\s*([0-4])\}/g, (_, idx) => String(teams[+idx]));
 
-  // Convert "\n" to real newlines; preserve spaces exactly
   raw = raw.replaceAll("\\n", "\n");
 
-  // Parse Unity tags safely to HTML
   let s = raw;
   s = s.replace(/<\s*b\s*>/gi, "__B_OPEN__")
        .replace(/<\s*\/\s*b\s*>/gi, "__B_CLOSE__")
@@ -187,7 +176,6 @@ function render(){
         .replace(/__COLOR_OPEN__([^_]+)__/g, (_,c)=>`<span style="color:${cssColor(c)};">`)
         .replaceAll("__COLOR_CLOSE__","</span>");
 
-  // Render lines; autoscale each to container width (612px desktop; 100% mobile)
   const lines = s.split("\n").map(l => l==="" ? "&nbsp;" : l);
   preview.innerHTML = lines.map(l=>`<div class="line">${l}</div>`).join("");
 
@@ -200,7 +188,6 @@ function render(){
   });
 }
 
-/* Utils */
 function pad2(n){return n.toString().padStart(2,"0")}
 function clampInt(n,min,max){ if(Number.isNaN(n)) return min; return Math.max(min, Math.min(max,n)); }
 function escapeHtml(str){ return str.replaceAll(/&/g,"&amp;").replaceAll(/</g,"&lt;").replaceAll(/>/g,"&gt;"); }
@@ -210,6 +197,6 @@ function cssColor(c){
   return named.has(c) ? c : "#ffffff";
 }
 
-/* Init */
 applyLang();
 render();
+
